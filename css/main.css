@@ -1355,6 +1355,6 @@ body {
 #fireworks {
   position: fixed;
   inset: 0;
-  z-index: 9998; /* lebih rendah dari ucapan ulang tahun (9999) */
+  z-index: 1; /* Lebih rendah dari bunga (yang biasanya di z-index default/otomatis) */
   pointer-events: none;
 }
