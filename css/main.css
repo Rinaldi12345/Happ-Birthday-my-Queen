@@ -1326,34 +1326,40 @@ body {
 /* tambahan untuk birthday message */
 .birthday-message {
   position: fixed;
-  top: 20%;
+  top: 8%;
   width: 100%;
   text-align: center;
-  font-family: 'Poppins', sans-serif;
-  font-size: 2.5rem;
-  color: #fff;
-  text-shadow: 0 0 10px #fff, 0 0 30px #ff80c0, 0 0 60px #ff4da6;
   z-index: 9999;
-  animation: fadeInText 4s ease-in-out forwards;
-  opacity: 0;
+  pointer-events: none;
 }
 
 .birthday-message span {
-  display: block;
-  font-size: 3.2rem;
-  font-weight: bold;
-  margin-top: 10px;
-  color: #ffe6f9;
-  text-shadow: 0 0 10px #ffe6f9, 0 0 20px #ff99cc, 0 0 40px #ff66cc;
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(
+    120deg,
+    #ffffff 0%,
+    #ff99cc 25%,
+    #ffffff 50%,
+    #ff99cc 75%,
+    #ffffff 100%
+  );
+  background-size: 300% auto;
+  color: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: shimmer 3s linear infinite;
 }
 
-@keyframes fadeInText {
+@keyframes shimmer {
   0% {
-    opacity: 0;
-    transform: translateY(-50px) scale(0.9);
+    background-position: 0% center;
   }
   100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+    background-position: 300% center;
   }
 }
