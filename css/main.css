@@ -1331,35 +1331,24 @@ body {
   text-align: center;
   z-index: 9999;
   pointer-events: none;
+  opacity: 0;
+  transform: translateY(-30px);
+  animation: fadeInText 3s ease forwards;
+  animation-delay: 5s; /* Muncul setelah bunga selesai mekar */
 }
 
 .birthday-message span {
   display: inline-block;
-  font-size: 1.6rem;
-  font-weight: 600;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(
-    120deg,
-    #ffffff 0%,
-    #ff99cc 25%,
-    #ffffff 50%,
-    #ff99cc 75%,
-    #ffffff 100%
-  );
-  background-size: 300% auto;
-  color: #fff;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  animation: shimmer 3s linear infinite;
+  font-size: 2.2rem;
+  font-family: 'Great Vibes', cursive;
+  color: #ffe6f9;
+  text-shadow: 0 0 8px #ff80c0, 0 0 15px #ffb3d9;
+  letter-spacing: 1px;
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: 0% center;
-  }
-  100% {
-    background-position: 300% center;
+@keyframes fadeInText {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
