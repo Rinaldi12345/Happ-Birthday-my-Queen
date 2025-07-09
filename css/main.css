@@ -1352,3 +1352,9 @@ body {
     transform: translateY(0);
   }
 }
+#fireworks {
+  position: fixed;
+  inset: 0;
+  z-index: 9998; /* lebih rendah dari ucapan ulang tahun (9999) */
+  pointer-events: none;
+}
