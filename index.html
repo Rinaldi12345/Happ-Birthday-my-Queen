@@ -1,34 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="img/flowers.png" type="image/x-icon">
-    <title>Flowers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="flowers.png" type="image/x-icon">
+    <title>Untuk Ratuku 👑</title>
 </head>
 <body>
-    <div class="greetings">
-    <!-- silahkan menambah kata sesuai keinginan dengan <span>text...</span -->
-        <span>H</span>
-        <span>A</span>
-        <span>L</span>
-        <span>L</span>
-        <span>O</span>
-        <span>K</span>
-        <span>A</span>
-        <span>M</span>
-        <span>U</span>
-    </div>
-    <div class="description">
-        <span>Aku punya hadiah spesial spesial lagi nih buat kamu &#128525;</span>
-    </div>
-    <div class="button">
-        <button>
-            <a href="flower.html">Klik disini</a>
-        </button>
-        
-    </div>
+
+    <div class="night"></div>
+    <div class="stars"></div>
+    <div class="petals" id="petals"></div>
+
+    <main class="stage">
+        <p class="eyebrow">untuk seseorang yang istimewa</p>
+
+        <div class="greetings" aria-label="Hallo Sayang">
+            <span style="--i:0">H</span>
+            <span style="--i:1">A</span>
+            <span style="--i:2">L</span>
+            <span style="--i:3">L</span>
+            <span style="--i:4">O</span>
+            <span class="sp"></span>
+            <span style="--i:5">S</span>
+            <span style="--i:6">A</span>
+            <span style="--i:7">Y</span>
+            <span style="--i:8">A</span>
+            <span style="--i:9">N</span>
+            <span style="--i:10">G</span>
+        </div>
+
+        <p class="crown">👑 my queen 👑</p>
+
+        <div class="description">
+            <span>Aku punya hadiah kecil yang sudah kusiapkan khusus untuk kamu&hellip;</span>
+        </div>
+
+        <div class="button">
+            <a href="flower.html" class="btn">
+                <span>Klik disini</span>
+                <svg class="btn__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        // buat taburan kelopak yang lembut jatuh dari atas
+        const petalContainer = document.getElementById('petals');
+        const petalCount = 18;
+
+        for (let i = 0; i < petalCount; i++) {
+            const petal = document.createElement('span');
+            petal.className = 'petal';
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.setProperty('--dur', (8 + Math.random() * 8) + 's');
+            petal.style.setProperty('--delay', (Math.random() * 10) + 's');
+            petal.style.setProperty('--drift', (Math.random() * 60 - 30) + 'px');
+            petal.style.opacity = (0.4 + Math.random() * 0.5).toFixed(2);
+            petal.style.width = petal.style.height = (8 + Math.random() * 8) + 'px';
+            petalContainer.appendChild(petal);
+        }
+    </script>
+
 </body>
 </html>
