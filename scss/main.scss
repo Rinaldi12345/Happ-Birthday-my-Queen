@@ -1377,17 +1377,14 @@ body {
     transform: scale(0.5) rotate(79deg) rotateX(10deg) rotateY(-200deg);
   }
 }
-
 .growing-grass {
   animation: growing-grass-ans 1s 2s backwards;
 }
-
 @keyframes growing-grass-ans {
   0% {
     transform: scale(0);
   }
 }
-
 .container * {
   animation-play-state: paused !important;
 }
