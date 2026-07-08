@@ -6,6 +6,8 @@
     --cyan: #39c6d6;
     --rose: #ff7aa8;
     --gold: #ffd166;
+    /* warna teks saat fase "redup" pada animasi glow — tetap terbaca, tidak menghilang */
+    --dim: rgba(244, 241, 234, 0.38);
 }
 
 *{
@@ -17,6 +19,8 @@
 
 html, body{
     height: 100%;
+    width: 100%;
+    max-width: 100vw;
     overflow-x: hidden;
 }
 
@@ -24,12 +28,13 @@ body{
     color: var(--ink);
     width: 100%;
     min-height: 100vh;
+    min-height: 100dvh; /* akurat di browser mobile (address bar dinamis) */
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--night);
     position: relative;
-    padding: 20px;
+    padding: clamp(12px, 4vw, 24px);
 }
 
 /* ---------- background: night sky ---------- */
@@ -103,35 +108,38 @@ body{
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 24px;
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
+    padding: clamp(10px, 3vw, 24px);
 }
 
 .eyebrow{
     font-family: 'Great Vibes', cursive;
-    font-size: 2rem;
+    /* skala mengikuti lebar layar, jadi selalu pas di HP kecil maupun besar */
+    font-size: clamp(1.1rem, 5vw, 2rem);
     color: var(--gold);
     letter-spacing: 0.5px;
-    margin-bottom: 4px;
-    opacity: 0.9;
-    word-wrap: break-word;
+    margin-bottom: clamp(2px, 1vw, 4px);
+    opacity: 0.95;
+    max-width: 100%;
     overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .greetings{
-    font-size: 5.5rem;
+    font-size: clamp(1.9rem, 9vw, 5.5rem);
     font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: 2px;
-    word-wrap: break-word;
+    line-height: 1.15;
+    letter-spacing: clamp(0.5px, 0.3vw, 2px);
+    max-width: 100%;
     overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .greetings .sp{
     display: inline-block;
-    width: 0.35em;
+    width: 0.3em;
 }
 
 .greetings > span:not(.sp){
@@ -140,6 +148,8 @@ body{
     animation-delay: calc(var(--i) * 0.12s);
 }
 
+/* fase "redup" memakai --dim (bukan warna gelap nyaris-sama-dengan-background),
+   jadi teks tidak pernah benar-benar hilang dari pandangan */
 @keyframes glow{
     0%, 100%{
         color: #fff;
@@ -150,31 +160,35 @@ body{
         text-shadow: 0 0 14px var(--rose), 0 0 40px var(--rose);
     }
     10%, 90%{
-        color: #1a1425;
-        text-shadow: none;
+        color: var(--dim);
+        text-shadow: 0 0 8px rgba(244, 241, 234, 0.15);
     }
 }
 
 .crown{
-    margin-top: 10px;
-    font-size: 1.1rem;
-    letter-spacing: 3px;
+    margin-top: clamp(6px, 2vw, 10px);
+    font-size: clamp(0.7rem, 2.6vw, 1.1rem);
+    letter-spacing: clamp(1px, 0.6vw, 3px);
     text-transform: uppercase;
     color: var(--gold);
-    opacity: 0.85;
-    word-wrap: break-word;
+    opacity: 0.9;
+    max-width: 100%;
     overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .description{
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 1.6rem;
+    font-size: clamp(0.95rem, 3.6vw, 1.6rem);
+    line-height: 1.4;
     max-width: 32rem;
-    margin: 22px 0 34px;
-    color: #e9e4f5;
-    word-wrap: break-word;
+    width: 100%;
+    margin: clamp(14px, 4vw, 22px) 0 clamp(20px, 5vw, 34px);
+    color: #efeaf9; /* dinaikkan sedikit dari #e9e4f5 untuk kontras lebih baik di layar terang */
     overflow-wrap: break-word;
+    word-break: break-word;
+    padding: 0 clamp(4px, 2vw, 8px);
 }
 
 /* ---------- button ---------- */
@@ -187,18 +201,20 @@ body{
 .btn{
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    gap: clamp(6px, 1.5vw, 10px);
     text-decoration: none;
-    font-size: 1rem;
+    font-size: clamp(0.8rem, 2.8vw, 1rem);
     font-weight: 600;
     color: #1a1425;
     background: linear-gradient(120deg, var(--gold), var(--rose));
-    padding: 14px 30px;
+    padding: clamp(10px, 2.6vw, 14px) clamp(20px, 5vw, 30px);
     border-radius: 999px;
     box-shadow: 0 0 0 rgba(255, 122, 168, 0.6);
     animation: pulse 2.4s ease-in-out infinite;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     white-space: nowrap;
+    max-width: 100%;
 }
 
 .btn:hover{
@@ -208,6 +224,8 @@ body{
 .btn__icon{
     transition: transform 0.25s ease;
     flex-shrink: 0;
+    width: clamp(14px, 4vw, 18px);
+    height: clamp(14px, 4vw, 18px);
 }
 
 .btn:hover .btn__icon{
@@ -223,115 +241,102 @@ body{
     }
 }
 
-/* ---------- tablet media query ---------- */
+/* =====================================================
+   MEDIA QUERIES
+   clamp() di atas sudah menangani sebagian besar skala
+   font/spacing secara mulus. Breakpoint di bawah ini
+   hanya untuk menyesuaikan LAYOUT (bukan ukuran font)
+   di titik-titik ukuran HP yang umum.
+   ===================================================== */
+
+/* tablet kecil & HP besar (landscape) */
 @media screen and (max-width: 768px){
-    body{
-        padding: 15px;
-    }
-    
     .stage{
-        padding: 16px;
-    }
-    
-    .eyebrow{ 
-        font-size: 1.6rem; 
-        margin-bottom: 8px;
-    }
-    
-    .greetings{
-        font-size: 3.5rem;
-        letter-spacing: 1.5px;
-    }
-    
-    .crown{ 
-        font-size: 0.95rem; 
-        margin-top: 8px;
-    }
-    
-    .description{
-        font-size: 1.35rem;
-        padding: 0 8px;
-        margin: 16px 0 24px;
-    }
-    
-    .btn{
-        font-size: 0.95rem;
-        padding: 12px 26px;
+        gap: 2px;
     }
 }
 
-/* ---------- mobile media query (small phones) ---------- */
+/* HP pada umumnya (potrait) — iPhone standar, Android menengah */
 @media screen and (max-width: 480px){
     body{
+        padding: 12px;
+        align-items: center;
+    }
+    .stage{
         padding: 10px;
     }
-    
-    .stage{
-        padding: 12px;
-        max-width: 100%;
-    }
-    
-    .eyebrow{ 
-        font-size: 1.2rem;
-        margin-bottom: 6px;
-    }
-    
-    .greetings{
-        font-size: 2.2rem;
-        letter-spacing: 0.8px;
-        line-height: 1;
-    }
-    
-    .greetings .sp{
-        width: 0.2em;
-    }
-    
-    .crown{ 
-        font-size: 0.75rem;
-        letter-spacing: 1.5px;
-        margin-top: 6px;
-    }
-    
     .description{
-        font-size: 0.9rem;
-        padding: 0 4px;
-        margin: 12px 0 18px;
-        max-width: 100%;
-    }
-    
-    .btn{
-        font-size: 0.8rem;
-        padding: 10px 20px;
-        gap: 6px;
-    }
-    
-    .btn__icon{
-        width: 16px;
-        height: 16px;
+        margin: 12px 0 20px;
     }
 }
 
-/* ---------- extra small phones ---------- */
-@media screen and (max-width: 360px){
-    .eyebrow{ 
-        font-size: 1rem;
+/* HP kecil / lama — iPhone SE, dsb */
+@media screen and (max-width: 375px){
+    body{
+        padding: 8px;
     }
-    
+    .stage{
+        padding: 8px 6px;
+    }
     .greetings{
-        font-size: 1.8rem;
         letter-spacing: 0.5px;
     }
-    
-    .crown{ 
-        font-size: 0.65rem;
-    }
-    
     .description{
-        font-size: 0.8rem;
+        margin: 10px 0 16px;
     }
-    
     .btn{
-        font-size: 0.75rem;
-        padding: 8px 16px;
+        padding: 10px 18px;
+    }
+}
+
+/* HP sangat sempit — layar lipat, mode terkecil */
+@media screen and (max-width: 320px){
+    .eyebrow{
+        margin-bottom: 2px;
+    }
+    .description{
+        margin: 8px 0 14px;
+    }
+    .btn{
+        padding: 9px 16px;
+        gap: 5px;
+    }
+}
+
+/* HP dalam mode landscape (layar pendek) — cegah konten kepotong/overflow vertikal */
+@media screen and (max-height: 480px) and (orientation: landscape){
+    body{
+        align-items: flex-start;
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+    .stage{
+        padding: 6px;
+    }
+    .eyebrow{
+        margin-bottom: 2px;
+    }
+    .greetings{
+        line-height: 1.05;
+    }
+    .crown{
+        margin-top: 4px;
+    }
+    .description{
+        margin: 10px 0 14px;
+    }
+}
+
+/* hormati preferensi pengguna yang sensitif terhadap animasi/gerakan */
+@media (prefers-reduced-motion: reduce){
+    .greetings > span:not(.sp),
+    .stars,
+    .petal,
+    .btn{
+        animation: none;
+    }
+    .greetings > span:not(.sp){
+        color: #fff;
+        text-shadow: 0 0 12px var(--cyan), 0 0 30px var(--cyan);
     }
 }
