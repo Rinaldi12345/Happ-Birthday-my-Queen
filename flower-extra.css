@@ -14,6 +14,7 @@
     animation: next-fade-in-wrap 1.4s ease forwards;
     animation-delay: 6.5s;
     pointer-events: none;
+    padding: 0 20px;
 }
 
 .next-caption{
@@ -22,6 +23,9 @@
     color: #ffd166;
     text-shadow: 0 0 10px rgba(255, 209, 102, 0.5);
     margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: center;
 }
 
 .next-btn{
@@ -41,6 +45,7 @@
     box-shadow: 0 4px 18px rgba(255, 122, 168, 0.35);
     animation: next-pulse 2.4s ease-in-out infinite;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
+    white-space: nowrap;
 }
 
 .next-btn:hover{
@@ -50,6 +55,7 @@
 .next-btn__arrow{
     display: inline-block;
     transition: transform 0.25s ease;
+    flex-shrink: 0;
 }
 
 .next-btn:hover .next-btn__arrow{
@@ -77,15 +83,60 @@
     }
 }
 
-@media screen and (max-width: 574px){
+/* ---------- tablet media query ---------- */
+@media screen and (max-width: 768px){
     .next-wrap{
-        bottom: 3.5vh;
+        bottom: 4vh;
+        padding: 0 15px;
+        gap: 8px;
     }
+    
     .next-caption{
-        font-size: 1.3rem;
+        font-size: 1.4rem;
     }
+    
     .next-btn{
-        font-size: 0.85rem;
-        padding: 10px 22px;
+        font-size: 0.9rem;
+        padding: 11px 24px;
+    }
+}
+
+/* ---------- mobile media query (small phones) ---------- */
+@media screen and (max-width: 480px){
+    .next-wrap{
+        bottom: 3vh;
+        padding: 0 12px;
+        gap: 6px;
+    }
+    
+    .next-caption{
+        font-size: 1.1rem;
+    }
+    
+    .next-btn{
+        font-size: 0.8rem;
+        padding: 9px 20px;
+        gap: 6px;
+    }
+}
+
+/* ---------- extra small phones ---------- */
+@media screen and (max-width: 360px){
+    .next-wrap{
+        bottom: 2.5vh;
+        padding: 0 10px;
+    }
+    
+    .next-caption{
+        font-size: 0.95rem;
+    }
+    
+    .next-btn{
+        font-size: 0.75rem;
+        padding: 8px 16px;
+    }
+    
+    .next-btn__arrow{
+        font-size: 0.7rem;
     }
 }
